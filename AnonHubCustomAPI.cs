@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -14,9 +15,9 @@ using System.Runtime.CompilerServices;
 namespace AnonHubCustomAPI
 {
     /// <summary>
-    /// AnonHub ECHTE FUNKTIONIERENDE Exploit API
-    /// Basiert auf echten Exploit-Techniken: DLL-Injection + LoadLibrary + CreateRemoteThread
-    /// KEINE SIMULATION - ECHTE ROBLOX SCRIPT EXECUTION!
+    /// AnonHub ULTIMATE EXPLOIT API v8.0.0 - LUAU COMPILER INTEGRATION
+    /// Basiert auf echten Exploit-Techniken: DLL-Injection + Luau AST Parser + Bytecode Compiler
+    /// ECHTE ROBLOX LUAU SCRIPT COMPILATION & EXECUTION!
     /// </summary>
     public static class AnonHubAPI
     {
@@ -24,7 +25,7 @@ namespace AnonHubCustomAPI
         private static bool isAttached = false;
         private static Process robloxProcess = null;
         private static IntPtr robloxHandle = IntPtr.Zero;
-        private static string apiVersion = "AnonHub ULTIMATE Exploit v7.0.0 - FULL UNC/sUNC";
+        private static string apiVersion = "AnonHub ULTIMATE Exploit v8.0.0 - LUAU COMPILER INTEGRATION";
         
         // Exploit DLL Path
         private static string exploitDllPath = "";
@@ -254,76 +255,76 @@ namespace AnonHubCustomAPI
             }
         }
         
-        // NEUE DLL ENTRY POINTS - Für bin\AnonHubWorkingAPI.dll Kompatibilität
-        [DllExport("InitializeAPI", CallingConvention = CallingConvention.StdCall)]
+        // NEUE DLL ENTRY POINTS - Für bin\AnonHubWorkingAPI.dll Kompatibilität (Cdecl)
+        [DllExport("InitializeAPI", CallingConvention = CallingConvention.Cdecl)]
         public static int InitializeAPI()
         {
             return Initialize();
         }
         
-        [DllExport("AttachAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("AttachAPI", CallingConvention = CallingConvention.Cdecl)]
         public static int AttachAPI()
         {
             return Attach();
         }
         
-        [DllExport("ExecuteScriptAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("ExecuteScriptAPI", CallingConvention = CallingConvention.Cdecl)]
         public static int ExecuteScriptAPI([MarshalAs(UnmanagedType.LPStr)] string script)
         {
             return ExecuteScript(script);
         }
         
-        [DllExport("IsAttachedAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("IsAttachedAPI", CallingConvention = CallingConvention.Cdecl)]
         public static bool IsAttachedAPI()
         {
             return IsAttached();
         }
         
-        [DllExport("KillRobloxAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("KillRobloxAPI", CallingConvention = CallingConvention.Cdecl)]
         public static void KillRobloxAPI()
         {
             KillRoblox();
         }
         
-        [DllExport("ShutdownAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("ShutdownAPI", CallingConvention = CallingConvention.Cdecl)]
         public static void ShutdownAPI()
         {
             Shutdown();
         }
         
-        [DllExport("GetVersionAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("GetVersionAPI", CallingConvention = CallingConvention.Cdecl)]
         public static IntPtr GetVersionAPI()
         {
             string version = GetVersion();
             return Marshal.StringToHGlobalAnsi(version);
         }
         
-        [DllExport("RegisterExecutorAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("RegisterExecutorAPI", CallingConvention = CallingConvention.Cdecl)]
         public static void RegisterExecutorAPI([MarshalAs(UnmanagedType.LPStr)] string executorName)
         {
             RegisterExecutor(executorName);
         }
         
-        [DllExport("ExecuteScriptBytesAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("ExecuteScriptBytesAPI", CallingConvention = CallingConvention.Cdecl)]
         public static void ExecuteScriptBytesAPI(byte[] scriptBytes)
         {
             ExecuteScriptBytes(scriptBytes);
         }
         
-        [DllExport("ReadLuauFileAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("ReadLuauFileAPI", CallingConvention = CallingConvention.Cdecl)]
         public static IntPtr ReadLuauFileAPI([MarshalAs(UnmanagedType.LPStr)] string filename)
         {
             string result = ReadLuauFile(filename);
             return result != null ? Marshal.StringToHGlobalAnsi(result) : IntPtr.Zero;
         }
         
-        [DllExport("SetClipboardAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("SetClipboardAPI", CallingConvention = CallingConvention.Cdecl)]
         public static void SetClipboardAPI([MarshalAs(UnmanagedType.LPStr)] string text)
         {
             SetClipboard(text);
         }
         
-        [DllExport("GetClipboardAPI", CallingConvention = CallingConvention.StdCall)]
+        [DllExport("GetClipboardAPI", CallingConvention = CallingConvention.Cdecl)]
         public static IntPtr GetClipboardAPI()
         {
             string result = GetClipboard();
